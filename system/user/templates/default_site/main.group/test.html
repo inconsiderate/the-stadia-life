@@ -1,0 +1,197 @@
+{layout="_layouts/_base"}
+
+{layout:set name='description'}The number one best Stadia community in all the land.{/layout:set}
+
+<div class="uk-padding-remove uk-section uk-section-primary uk-light uk-margin-large-top uk-background-cover uk-background-muted" style="background-image: url('/assets/site_images/header_feature_1920x350.jpg');border:2px solid black;";>
+    <div class="uk-overlay uk-overlay-primary uk-padding"uk-grid>
+        <div class="uk-width-expand@m">
+            <div class="uk-container">
+                <h1 class="uk-heading-small uk-heading-line"><span>The Stadia Life</span></h1>
+
+                <div class="uk-grid uk-grid-stack uk-padding" uk-grid>
+                    <div class="uk-padding-remove uk-width-1-2@m">
+                      <p>Welcome to the best <strong>Stadia</strong> community around. No really.<br/>Wanna chat? Come join us on our official Discord.</p>
+                      <p></p>
+                    </div>
+                                        <div>
+                <a href="https://discord.gg/JwHvYxv"><div class="uk-width-1-2"><div class="blocker" style="position: absolute;height: 75px;width: 300px;z-index: 1;"></div><iframe src="https://discordapp.com/widget?id=707699626760732730&theme=dark" width="auto" height="75" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe></div></a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+$iframe = '';
+
+{exp:channel:entries channel="globals" limit="1"}
+{!-- For each promoted stream, check if they are currently live --}
+	{promoted_livestreams sort="desc"}
+            $ch = curl_init();
+            $header[] = "Accept-Language: en-US,en;q=0.9,it;q=0.8";
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+            curl_setopt($ch, CURLOPT_URL, "https://www.youtube.com/channel/{promoted_livestreams:youtube_channel_id}");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $output = curl_exec($ch);
+            curl_close($ch);
+            
+            if (strstr($output, "LIVE NOW")) {
+            	$title = '{promoted_livestreams:streamer_name}';
+				$iframe = '<iframe uk-responsive uk-video="automute: true" width="560" height="315" src="https://www.youtube.com/embed/live_stream?channel={promoted_livestreams:youtube_channel_id}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            }
+    {/promoted_livestreams}
+{/exp:channel:entries}
+
+if ($iframe) {
+
+echo '<div class="uk-section uk-section-primary uk-light uk-margin-large-top">
+    <div uk-grid>
+        <div class="uk-width-expand@m">
+            <div class="uk-container">
+                <h1 class="uk-heading-small uk-heading-line"><span>Streaming Live!</span></h1>
+
+                <div class="uk-grid-match uk-child-width-expand" uk-grid>';
+                    echo $iframe;
+                echo '<a href="https://discord.gg/JwHvYxv"><div class="uk-width-1-2">Join the conversation!<div class="blocker" style="position: absolute;height: 75px;width: 300px;z-index: 1;"></div><iframe src="https://discordapp.com/widget?id=707699626760732730&theme=dark" width="auto" height="75" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe></div></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>';
+
+} 
+?>
+        
+<div class="">
+    <div class="uk-section uk-light">
+        <div class="uk-container">
+
+			<h1 class="uk-heading-small uk-heading-line"><span>Top Stories</span></h1>
+
+            <div class="uk-child-width-1-2@m uk-grid" uk-grid="">
+                {exp:channel:entries channel="news" limit="5"}
+                {if count == 1}
+                <div>
+                	<div>
+                        <div>
+                            <a href="{url_title_path='news'}">
+                                <div class="uk-card uk-card-default uk-card-body uk-background-cover uk-background-muted uk-height-large" style="background-image: url({news_banner:article});">                        
+									{categories}
+                                    	<div class="uk-card-badge uk-label">    
+                                        	{category_name}
+                                    	</div>
+                                    {/categories}
+								    <p class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-large">{title}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-child-width-1-2@s" uk-grid uk-height-match="target: > div > .uk-card">
+                {if:else}
+                        <div>
+                            <a href="{url_title_path='news'}">
+                                <div class="uk-card uk-card-default uk-card-body uk-background-cover uk-background-muted uk-height-small" style="height: 204px; background-image: url({news_banner:article});">
+                                	{categories}
+                                    	<div class="uk-card-badge uk-label">    
+                                        	{category_name}
+                                    	</div>
+                                    {/categories}
+                                    <p class="uk-overlay uk-overlay-primary uk-position-bottom" style="padding: 15px;">{title}</p>
+                                </div>
+                            </a>
+                        </div>
+                {/if}
+                {/exp:channel:entries}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uk-container uk-section uk-section-primary uk-light">
+
+<div uk-grid>
+    <div class="uk-width-expand@m">
+        <div class="uk-container">
+			<h1 class="uk-heading-small uk-heading-line"><span>Community Events</span></h1>
+
+            <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
+                {exp:channel:entries channel="events" show_future_entries="yes" order_by="entry_date" sort="asc"}
+                        <div>
+                        <a href="{url_title_path='events'}">
+							<div class="uk-card uk-card-default uk-card-body uk-background-cover uk-background-muted uk-height-small" 
+                            {if banner_image} style="background-image: url({banner_image:tinyrec});"
+                            {if:else} style="background-image: url({related_game show_future_entries="yes"}{related_game:banner_image:tinyrec}{/related_game});"
+                            {/if}>
+            				<p class="uk-overlay uk-overlay-primary uk-position-bottom" style="padding: 15px;">{title}</p>
+        					</div>
+                            </a>
+                        </div>
+                {/exp:channel:entries}
+            </div>
+            
+        </div>
+
+
+<div class="uk-section uk-section-primary uk-light">
+    <div class="uk-container">
+		<h1 class="uk-heading-small uk-heading-line"><span>Recent Game Guides</span></h1>
+
+        <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
+			{exp:channel:entries channel="game_guides" show_future_entries="yes"}
+				<div>
+					<a href="{url_title_path='guides'}">
+						<div class="uk-card uk-card-default uk-card-body uk-background-cover uk-background-muted uk-height-small"
+                        {if banner_image} style="background-image: url({banner_image:tinyrec});"
+                            {if:else} style="background-image: url({related_game show_future_entries="yes"}{related_game:banner_image:tinyrec}{/related_game});"
+                            {/if}
+                        >
+                        <div class="uk-overlay uk-position-top-right" style="padding: 10px;">
+                            <span class="uk-label">
+                               {related_game}{related_game:title}{/related_game}
+                            </span>
+                            </div>
+                            
+                        
+							<p class="uk-overlay uk-overlay-primary uk-position-bottom" style="padding: 15px;">{title}</p>
+        				</div>
+					</a>
+				</div>
+			{/exp:channel:entries}
+        </div>
+    </div>
+    
+</div>
+    </div>
+    <div class="uk-width-1-4@m uk-visible@m">
+   
+        <ul uk-tab uk-switcher="animation:uk-animation-slide-right-medium; duration:250">
+            <li class="uk-active"><a href="#">New Releases</a></li>
+            <li><a href="#">Coming Up</a></li>
+        </ul>
+        <ul class="uk-switcher uk-margin">
+            <div>
+				{exp:channel:entries channel="games" sort="desc" orderby="entry_date" limit="7" search:expected_release="IS_EMPTY"}
+					<a href="{url_title_path='games'}" class="uk-grid uk-animation-toggle" tabindex="0" style="margin-left:0;margin-top:15px;">
+                        <div class="uk-animation-shake uk-width-1-3 uk-background-cover" style="background-image: url({banner_image:tinyrec});"></div>
+                        <p class="uk-width-2-3 uk-padding-small">{title}<span class="uk-badge uk-margin-right">{entry_date format="%M %j%S, %Y"}</span></p>
+        			</a>
+                {/exp:channel:entries}
+            </div>
+            
+            <div>
+				{exp:channel:entries channel="games" sort="asc" orderby="entry_date" limit="7" search:expected_release="IS_EMPTY" start_on="{current_time format='%Y-%m-%d %H:%i'}" show_future_entries="yes"}
+					<a href="{url_title_path='games'}" class="uk-grid uk-animation-toggle" tabindex="0" style="margin-left:0;margin-top:15px;">
+                        <div class="uk-animation-shake uk-width-1-3 uk-background-cover" style="background-image: url({banner_image:tinyrec});"></div>
+                        <p class="uk-width-2-3 uk-padding-small">{title}<span class="uk-badge uk-margin-right">{entry_date format="%M %j%S, %Y"}</span></p>
+        			</a>
+                {/exp:channel:entries}
+            </div>
+        </ul>
+    </div>
+</div>
+</div>

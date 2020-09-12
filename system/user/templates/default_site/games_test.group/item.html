@@ -1,0 +1,117 @@
+{layout="_layouts/_base"}
+
+<div class="uk-section uk-light uk-container">
+
+{exp:channel:entries channel="games" limit="1" disable="categories|pagination" show_future_entries="yes"}
+
+    {layout:set name='title'}{title}{/layout:set}
+    {layout:set name='description'}{body_content:limit characters='150'}{/layout:set}
+    {layout:set name='image'}{banner_image:embed}{/layout:set}
+
+    <div class="uk-inline">
+        <img src="{banner_image}" alt="">
+        <div class="uk-padding-small uk-overlay uk-overlay-primary uk-position-bottom">
+            <h1 class="uk-heading-small uk-align-left uk-margin-medium-left uk-margin-small-bottom uk-visible@m">{title}</h1>
+            {if play_now_link}
+                <a href="{play_now_link }"><h1 class="uk-button-danger uk-margin-small-top uk-margin-medium-right uk-align-right uk-button-large">Launch Game</h1></a>
+            {if:else}
+                {if expected_release}
+                    <h1 class="uk-button-default uk-margin-small-top uk-margin-medium-right uk-align-right uk-button-large">Est {expected_release}</h1>
+                {/if}
+            {/if}
+        </div>
+    </div>
+
+    <div class="uk-flex uk-margin-medium-top" uk-grid>
+        <div class="uk-width-1-2@m uk-flex-first">
+            {body_content}
+        </div>
+        {if official_trailer}
+        <div class="uk-width-1-2@m">
+            {official_trailer}
+        </div>
+        {/if}
+    </div>
+
+    <hr class="uk-divider-icon">
+    <h2 class="uk-heading-tiny uk-text-center">Guides - Strategies - Walkthroughs</h2>
+    {parents field="related_game" channel="game_guides"}
+        {if parents:count == "1"}
+        <div class="uk-child-width-1-3@m uk-height-match='target: > div > .uk-first-column'" uk-grid>
+        {/if}
+        
+        {if '{parents:switch="1|2|2|1"}' == '1'}
+            <a href='{parents:url_title_path='guides'}'>{embed="_includes/_card_image_top" header="{parents:title}" content="{parents:body_content:limit characters='100'}" image="{if parents:banner_image}{parents:banner_image}{if:else}{banner_image}{/if}"}</a>
+        {/if}
+        {if '{parents:switch="1|2|2|1"}' == '2'}
+            <a href='{parents:url_title_path='guides'}'>{embed="_includes/_card_image_bottom" header="{parents:title}" content="{parents:body_content:limit characters='100'}" image="{if parents:banner_image}{parents:banner_image}{if:else}{banner_image}{/if}"}</a>
+        {/if}
+
+        {if parents:count == parents:total_results}
+        </div>
+        {/if}
+
+        {if parents:no_results}
+        <p class="uk-text-center">No guides for this game yet! Wanna <a href="{path='submissions/game-guide'}">submit</a> one?</p>
+        {/if}
+    {/parents}
+
+    <hr class="uk-divider-icon">
+    {parents field="reviewed_games" limit="4"}
+    {if parents:count == "1"}
+        <h2 class="uk-heading-tiny uk-text-center">Latest News</h2>
+        <div uk-grid>
+            <div class="uk-width-expand@m">
+                <div class="uk-container">
+                    <div class="uk-grid-match uk-child-width-1-4@m" uk-grid>
+    {/if}
+                        <div>
+                            <a href="{parents:url_title_path='news'}">
+                                <div class="uk-card uk-card-default uk-card-body uk-background-cover uk-background-muted uk-height-small" 
+                                {if parents:banner_image} style="background-image: url({parents:banner_image});">
+                                {if:else} style="background-image: url({banner_image});"
+                                {/if}>
+                                <p class="uk-overlay uk-overlay-primary uk-position-bottom" style="padding: 15px;">{parents:title}</p>
+                                </div>
+                            </a>
+                        </div>
+    {if parents:count == parents:total_results}
+                    </div>            
+                </div>
+            </div>
+        </div>
+
+        <hr class="uk-divider-icon">
+    {/if}
+    {/parents}
+
+
+{if game_achievements:total_rows}
+<h2 class="uk-heading-tiny uk-text-center">Achievements</h2>
+
+<ul uk-accordion>
+    {game_achievements}
+    <li>
+        
+        <a class="uk-accordion-title" href="#">
+	        <img class="uk-margin-small-right" data-src="{game_achievements:achievement_icon}" width="50" height="50" alt="" uk-img>
+            {game_achievements:achievement_name}
+        </a>
+        <div class="uk-accordion-content">
+          	<span class="uk-text-small">{game_achievements:achievement_description}</span>
+            <br/>
+			<p class="uk-badge">Achievement commenting coming soon!</p>
+        </div>
+        
+    <hr class="uk-divider-small">
+    </li>
+    {/game_achievements}
+</ul>
+
+<hr class="uk-divider-icon">
+{/if}
+
+{/exp:channel:entries}
+
+{embed="_includes/_comments" channel_name="games"}
+</div>

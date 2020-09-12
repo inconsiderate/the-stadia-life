@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.sitemaps.org/schema...
+ http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+	<url>
+	 <loc>https://thestadia.life</loc>
+	 <lastmod>2020-10-24T19:18:31+00:00</lastmod>
+	 <changefreq>monthly</changefreq>
+	</url>
+{exp:channel:entries channel="games|news|game_guides|events"}
+	<url>
+	  <loc>{comment_url_title_auto_path}</loc>
+	  <lastmod>{edit_date format="%Y-%m-%dT06:00:00+00:00"}</lastmod>
+	  <changefreq>weekly</changefreq>
+	</url>
+{/exp:channel:entries}
+</urlset>

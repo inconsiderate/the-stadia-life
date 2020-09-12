@@ -1,0 +1,29 @@
+{layout="_layouts/_base"}
+<div class="uk-section uk-light uk-container">
+{exp:channel:entries channel="game_guides" limit="1" disable="categories|pagination"}
+
+{layout:set name='title'}{title}{/layout:set}
+{layout:set name='description'}{body_content:limit characters='120'}{/layout:set}
+{layout:set name='image'}{banner_image:embed}{/layout:set}
+
+<div class="uk-inline">
+  <img src="{banner_image}" alt="">
+  <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+    <h1 class="uk-heading-small">{title}</h1>
+    {related_game}<p class="uk-text-lead"><a href="/games/{related_game:url_title}">{related_game:title}</a></p>{/related_game}
+  </div>
+</div>
+
+<h2 class="uk-heading-tiny uk-text-center">guide by: {author}</h2>
+
+<div class="uk-container">
+    {body_content}
+</div>
+
+{/exp:channel:entries}
+
+<hr class="uk-divider-icon">
+
+{embed="_includes/_comments" channel_name="game_guides"}
+
+</div>

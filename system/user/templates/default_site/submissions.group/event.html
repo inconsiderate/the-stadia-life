@@ -1,0 +1,78 @@
+{layout="_layouts/_base" title='Game Guide Submission'}
+
+<div class="uk-section uk-light uk-container uk-height-viewport">
+
+{layout:set name='title'}Submit an Event{/layout:set}
+{layout:set name='description'}Running an awesome Stadia event? Let the world know!!{/layout:set}
+
+<link href="{path='css/_ee_channel_form_css'}" type="text/css" rel="stylesheet" media="screen">
+
+
+  <h1 class="uk-heading-large">Event Submission</h1>
+        
+  {if logged_out}  
+	  <h1 class="uk-heading-small">Sorry, you must be logged in to submit an event.</h1>
+
+      {if:else}  
+
+{exp:channel:form channel="events" return="events/URL_TITLE" url_title="{segment_3}" rte_selector="#body_content"}
+
+<div class="uk-container">
+    <fieldset class="uk-fieldset uk-grid">
+        <div class="uk-margin">
+            <label class="uk-form-label uk-text-primary" for="form-stacked-text">Title</label>
+            <div class="uk-form-controls">
+                <input required class="uk-input" type="text" name="title" id="title" value="{title}" onkeyup="liveUrlTitle(event);">
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label uk-text-primary" for="form-stacked-text">URL Title</label>
+            <div class="uk-form-controls">
+                <input required class="uk-input" type="text" name="url_title" id="url_title" value="{url_title}" maxlength="75" size="50">
+            </div>
+        </div>
+        
+      	<div class="uk-margin uk-width-1-3">
+            <label class="uk-form-label uk-text-primary" for="form-stacked-text">When Is It?</label>
+            <div class="uk-form-controls">
+		        <input required type="date" name="entry_date" id="entry_date" value="{entry_date}" maxlength="23" size="25">
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label uk-text-primary" for="form-stacked-text">Event Banner Image (if none, we will display the image for the related game)</label>
+            <input class="uk-button uk-button-success" type="file" name="banner_image" />
+			<input type="hidden" name="banner_image_directory" value="6" />
+            <input type="hidden" value="{banner_image}{file_name}{/banner_image}" />
+        </div>
+
+        <div class="uk-margin uk-width-1-3">
+            <div uk-form-custom="target: > * > span:first-child">
+                <select required name="related_game[data][]" id="related_game">
+                	<option>For Which Game? (required)</option>
+                    {options:related_game}
+                      <option value="{option_value}"{selected}>{option_name}</option>
+                    {/options:related_game}
+                </select>
+                <button class="uk-button uk-button-success" type="button" tabindex="-1">
+                    <span></span>
+                    <span uk-icon="icon: chevron-down"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label uk-text-primary" for="form-stacked-text">Description, Details, How to sign up, Who to contact, etc</label>
+            <textarea class="uk-textarea"  name="body_content" id="body_content" cols="90" rows="10">{body_content}</textarea>
+        </div>
+        
+		<button class="uk-button uk-button-success uk-align-right" type="submit" name="submit" tabindex="-1">Submit</button>
+
+    </fieldset>
+</div>
+
+    
+{/exp:channel:form}
+  {/if}
+</div>

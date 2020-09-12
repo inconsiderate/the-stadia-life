@@ -1,0 +1,98 @@
+<div class="uk-visible@m" uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light; top: 200">
+    <nav class="uk-navbar-container">
+        <div class="uk-container uk-container-expand">
+            <div uk-navbar>
+                <ul class="uk-navbar-nav">
+                    <a href="/" class="{if !segment_1}uk-active{/if} uk-navbar-item uk-logo" href="#"><img data-src="/assets/site_images/thestadialife_logo.svg" alt="" height="80" width="80" uk-img style="min-width: 50px"></a>
+                    <li {if segment_1 == 'games'}class="uk-active"{/if}><a href="/games">Games</a></li>
+                    <li {if segment_1 == 'news'}class="uk-active"{/if}><a href="/news">News</a></li>
+                    <li {if segment_1 == 'events'}class="uk-active"{/if}><a href="/events">Events</a></li>
+                    <li {if segment_1 == 'leaderboards'}class="uk-active"{/if}  uk-tooltip="Leaderboards Coming Soon!"><a href="#">Leaderboards</a></li>
+                </ul>
+                
+                <ul class="uk-navbar-right">
+                    <div class="uk-margin-right">
+                      {exp:search:simple_form channel="games|game_guides|game_reviews|news|events" where="all" search_in="everywhere" form_class="uk-search uk-search-navbar uk-search-default" result_page="search/results" no_result_page="search/noresults" show_future_entries="yes"}
+	                      <span uk-search-icon></span>
+                          <input class="uk-search-input" type="text" name="keywords" id="keywords" value="" size="18" maxlength="100">
+                      {/exp:search:simple_form}
+                    
+                    </div>
+
+<button class="uk-button uk-button-default uk-margin-right" type="button">Submit Content</button>
+<div uk-dropdown>
+    <ul class="uk-nav uk-dropdown-nav">
+		<li class="uk-active"><a href="/submissions/event"><span uk-icon="calendar"></span> Community Event</a></li>
+      	<li class="uk-nav-divider"></li>
+        <li class="uk-active"><a href="/submissions/game-guide"><i class="material-icons">map</i> Game Guide</a></li>
+      	<li class="uk-nav-divider"></li>
+        <li class="uk-active"><a href="mailto:contact@thestadia.life"><span uk-icon="mail"></span> General Inquiries </a></li>
+    </ul>
+</div>
+            
+                    {if member_group == 1 || member_group == 6}
+                    <div><a class="uk-button uk-button-secondary" href="{path='/admin_tools'}" uk-toggle>Admin Tools</a></div>
+                    {/if}
+                    {if logged_in}
+                    <div><a class="uk-button uk-button-default" href="{path='member/profile'}" uk-toggle>Profile</a></div>
+                    <div><a class="uk-button uk-button-secondary" href="{path='logout'}" uk-toggle>Log Out</a></div>
+
+                    {if:else}
+                    <div><a class="uk-button uk-button-default" href="#modal-sections" uk-toggle>Login</a></div>
+                    {/if}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+        
+<nav class="uk-container uk-padding uk-navbar-container uk-navbar-transparent uk-hidden@m">
+
+    <div uk-navbar>
+        <span uk-icon="icon: menu; ratio: 2" style="color:#22e19f" uk-toggle="target: #offcanvas-overlay"></span>
+        <div class="uk-navbar-center">
+            <div type="button" uk-toggle="target: #offcanvas-overlay"><img data-src="/assets/site_images/thestadialife_logo.svg" alt="" height="75" width="75" uk-img></div>
+        </div>
+        <span class="uk-navbar-right" uk-icon="icon: search; ratio: 2" style="color:#22e19f" uk-toggle="target: #offcanvas-search"></span>
+    </div>
+
+    <div id="offcanvas-search" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <a class="{if !segment_1}uk-active{/if} uk-navbar-item uk-logo" href="/"><img data-src="/assets/site_images/thestadialife_logo.svg" alt="" height="80" width="80" uk-img></a>
+			{exp:search:simple_form channel="games|game_guides|game_reviews|news|events" where="all" search_in="everywhere" form_class="uk-search uk-search-navbar uk-search-default uk-margin-large-top " result_page="search/results" no_result_page="search/noresults" show_future_entries="yes"}
+				<span uk-search-icon></span>
+				<input class="uk-search-input" type="text" name="keywords" id="keywords" value="" size="18" maxlength="100">
+			{/exp:search:simple_form}
+		</div>
+    </div>
+    
+    
+    <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <a class="{if !segment_1}uk-active{/if} uk-navbar-item uk-logo" href="/"><img data-src="/assets/site_images/thestadialife_logo.svg" alt="" height="80" width="80" uk-img></a>
+                
+                <div class="uk-button-group uk-width-1-1 uk-margin-medium-bottom uk-margin-medium-top">
+                    <a href="/games"class="uk-button uk-button-primary uk-width-1-1 {if segment_1 == 'games'}uk-active{/if}">Games</a>
+                </div>
+                <div class="uk-button-group uk-width-1-1 uk-margin-medium-bottom">
+                    <a href="/news" class="uk-button uk-button-primary uk-width-1-1 {if segment_1 == 'news'}uk-active{/if}">News</a>
+                </div>
+                <div class="uk-button-group uk-width-1-1 uk-margin-medium-bottom">
+                    <a href="/events" class="uk-button uk-button-primary uk-width-1-1 {if segment_1 == 'events'}uk-active{/if}">Events</a>
+                </div>
+
+                <br/>
+            {if member_group == 1 || member_group == 6}
+            <div><a class="uk-button uk-width-1-1 uk-button-secondary" href="{path='/admin_tools'}" uk-toggle>Admin Tools</a></div>
+            {/if}
+            {if logged_in}
+            <div><a class="uk-button uk-width-1-1 uk-button-default" href="{path='logout'}" uk-toggle>Log Out</a></div>
+            <div><a class="uk-button uk-width-1-1 uk-button-secondary" href="{path='member/profile'}" uk-toggle>Profile</a></div>
+            {if:else}
+            <div class="uk-margin-large-top"><a class="uk-button uk-width-1-1 uk-button-default" href="#modal-sections" uk-toggle>Login</a></div>
+            {/if}
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,91 @@
+{embed="_includes/head"}
+{layout="_layouts/_base" title='Games'}
+
+
+<div class="uk-section uk-light uk-container uk-height-viewport">
+<style>
+strong {
+color:red;
+}
+</style>
+
+<div class="uk-container">
+
+<h1 class="uk-heading-medium">Games that are missing some shit</h1>
+
+<table class="uk-table uk-table-striped uk-table-hover">
+  <tr>
+    <th>Title</th>
+    <th>Banner</th>
+    <th>Description</th>
+    <th>Cheevs</th>
+    <th>Secret Cheeves</th>
+    <th>Play Link</th>
+    <th>Trailer</th>
+  </tr>
+  {exp:channel:entries channel="games" orderby="title" sort="asc" limit="1400" search:expected_release="IS_EMPTY"}
+
+  <tr>
+    <td class="{if banner_image && body_content && play_now_link && official_trailer && game_achievements:total_rows}uk-text-success{if:else}uk-text-danger{/if}"><a class="uk-link-reset" href="https://thestadia.life/admin.php?/cp/publish/edit/entry/{entry_id}">{title}</a></td>
+    <td>{if banner_image}{if:else}<strong uk-tooltip="Banner Image">NO</strong>{/if}</td>
+    <td>{if body_content}{if:else}<strong uk-tooltip="Description">NO</strong>{/if}</td>
+    <td>{if game_achievements:total_rows > 0}{if:else}<strong uk-tooltip="Trophies">NO</strong>{/if}</td>
+    
+    <td>
+    {game_achievements 
+        search:achievement_name="secret achievement"
+    }
+    <strong uk-tooltip="Secret Trophies">YES</strong>
+    {/game_achievements}
+    </td>
+    
+    <td>{if play_now_link}{if:else}<strong uk-tooltip="Play Link">NO</strong>{/if}</td> 
+    
+    <td>{if official_trailer}{if:else}<strong uk-tooltip="Trailer">NO</strong>{/if}</td> 
+
+  </tr>
+{/exp:channel:entries}
+
+</table>
+
+<h1 class="uk-heading-medium">Unreleased / Speculated Games</h1>
+
+<table class="uk-table uk-table-striped uk-table-hover">
+  <tr>
+    <th>Title</th>
+    <th>Banner</th>
+    <th>Expected Date</th>
+    <th>Description</th>
+    <th>Cheevs</th>
+    <th>Secret Cheeves</th>
+    <th>Play Link</th>
+    <th>Trailer</th>
+  </tr>
+  {exp:channel:entries channel="games" orderby="title" sort="asc" show_future_entries="yes" limit="1400" start_on="{current_time format='%Y-%m-%d %H:%i'}" show_future_entries="yes"}
+
+  <tr>
+    <td class="{if banner_image && body_content && !expected_release && play_now_link && official_trailer && game_achievements:total_rows}uk-text-success{if:else}uk-text-danger{/if}"><a class="uk-link-reset" href="https://thestadia.life/admin.php?/cp/publish/edit/entry/{entry_id}">{title}</a></td>
+    <td>{if banner_image}{if:else}<strong>NO</strong>{/if}</td>
+    <td>{if expected_release}<strong>YES</strong>{if:else}{/if}</td>
+    <td>{if body_content}{if:else}<strong>NO</strong>{/if}</td>
+    <td>{if game_achievements:total_rows > 0 || expected_release || entry_date > current_time}{if:else}<strong>NO</strong>{/if}</td>
+    
+    <td>
+    {game_achievements 
+        search:achievement_name="secret achievement"
+    }
+    <strong>YES</strong>
+    {/game_achievements}
+    </td>
+    
+    <td>{if play_now_link}{if:else}<strong>NO</strong>{/if}</td> 
+    
+    <td>{if official_trailer}{if:else}<strong>NO</strong>{/if}</td> 
+
+  </tr>
+{/exp:channel:entries}
+
+</table>
+</div>
+
+</div>

@@ -1,0 +1,207 @@
+{layout="_layouts/_base"}
+
+<div class="uk-section uk-light uk-container">
+
+{exp:channel:entries channel="games" limit="1" disable="categories|pagination" show_future_entries="yes"}
+
+    {layout:set name='title'}{title}{/layout:set}
+    {layout:set name='description'}{body_content:limit characters='150'}{/layout:set}
+    {layout:set name='image'}{banner_image:embed}{/layout:set}
+
+    <div class="uk-inline">
+        <img src="{banner_image}" alt="">
+        <div class="uk-padding-small uk-overlay uk-overlay-primary uk-position-bottom">
+            <h1 class="uk-heading-small uk-align-left uk-margin-medium-left uk-margin-small-bottom uk-visible@m">{title}</h1>
+            
+					{if play_now_link}
+                  		<a href="{play_now_link }"><h1 class="uk-button-danger uk-margin-small-top uk-margin-medium-right uk-align-right uk-button-large uk-margin-small-bottom ">{if entry_date < current_time}Play Now{if:else}Pre-Order Now{/if}</h1></a>
+                    {if:elseif expected_release}
+                  			<h1 class="uk-button-default uk-margin-small-top uk-margin-medium-right uk-align-right uk-button-large uk-margin-small-bottom ">{expected_release}</h1>
+                  	{if:else}
+	                    <h1 class="uk-button-default uk-margin-small-top uk-margin-medium-right uk-align-right uk-button-large uk-margin-small-bottom ">{entry_date format="%M %j, %Y"}</h1>
+                  	{/if}
+        </div>
+    </div>
+
+    <div class="uk-flex uk-margin-medium-top" uk-grid>
+		
+        <div class="uk-width-1-2@m uk-flex-first">
+            {body_content}
+        </div>
+        {if official_trailer}
+        <div class="uk-width-1-2@m">
+            {official_trailer}
+        </div>
+        {/if}
+    </div>
+
+	{parents  field="related_game" channel="events" show_future_entries="yes"}
+    <hr class="uk-divider-icon">
+    <h2 class="uk-heading-tiny uk-text-center">Community Events</h2>
+    <div>
+        <div class="uk-background-cover uk-background-muted uk-height-medium uk-panel uk-flex uk-flex-center uk-flex-middle" style="height: 250px;background-image: url({if parents:banner_image}{parents:banner_image:article}{if:else}{banner_image:article}{/if});">
+	        <div class="uk-overlay-primary uk-position-cover uk-overlay uk-position-bottom uk-light uk-section">
+				<h3 class="uk-heading-small"><a href="{parents:url_title_path='events'}">{parents:title}</a></h3>
+
+                <div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <p class="uk-text-large">{parents:entry_date format="%M %j, %Y"}</p>
+                    </div>
+                    <div>
+                        <p class="">{parents:body_content:limit characters="150"}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/parents}
+    
+    <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-expand@m">
+            <table class="uk-table uk-table-divider uk-light uk-table-justify uk-margin-top">
+                <tbody>
+	                {if expected_release}
+                     <tr>
+                        <td class="uk-text-middle">Release Date: {expected_release}</td>
+                        <td><a href="{rumour_source}" class="uk-button uk-button-default" type="button">Source</a></td>
+                    </tr>
+                    {if:else}
+                        <td class="uk-table-expand">Release Date</td>
+                        <td>{entry_date format="%M %j, %Y"}</td>
+                    <tr>
+                    </tr>
+                    {/if}
+    
+                    {game_details}
+                        {if game_details:genre}
+                        <tr>
+                            <td class="uk-table-expand">Genre</td>
+                            <td class="uk-table-expand">{game_details:genre}</td>
+                        </tr>
+                        {/if}
+                        {if game_details:game_modes}
+                        <tr>
+                            <td class="uk-table-expand">Game Modes</td>
+                            <td class="uk-table-expand">{game_details:game_modes}</td>
+                        </tr>
+                        {/if}
+	                {if game_details:accessibility_features}
+                    <tr>
+                        <td class="uk-table-expand">Accessibility Features</td>
+                        <td class="uk-table-expand">{game_details:accessibility_features}</td>
+                    </tr>
+                    {/if}
+                    {/game_details}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="uk-width-expand@m">
+        {game_details}
+            <table class="uk-table uk-table-divider uk-light uk-table-justify uk-margin-top">
+                <tbody>
+
+
+                        {if game_details:publisher}
+                        <tr>
+                            <td>Publisher</td>
+                            <td class="uk-table-expand">{game_details:publisher}</td>
+                        </tr>
+                        {/if}
+                        {if game_details:developers}
+                        <tr>
+                            <td>Developers</td>
+                            <td class="uk-table-expand">{game_details:developers}</td>
+                        </tr>
+                        {/if}
+	                {if game_details:languages}
+                    <tr>
+                        <td class="uk-table-expand">Languages</td>
+                        <td class="uk-table-expand">{game_details:languages}</td>
+                    </tr>
+                    {/if}
+                    </tr>
+                </tbody>
+            </table>
+        {/game_details}
+        </div>
+    </div>
+
+
+    <hr class="uk-divider-icon">
+
+    <h2 class="uk-heading-tiny uk-text-center">Guides & Strategies</h2>
+    {parents field="related_game" channel="game_guides"}
+        {if parents:count == "1"}
+        <div class="uk-child-width-1-3@m uk-height-match='target: > div > .uk-first-column'" uk-grid>
+        {/if}
+        
+        {if '{parents:switch="1|2|2|1"}' == '1'}
+            <a href='{parents:url_title_path='guides'}'>{embed="_includes/_card_image_top" author="{parents:author}" header="{parents:title}" content="{parents:body_content:limit characters='100'}" image="{if parents:banner_image}{parents:banner_image}{if:else}{banner_image}{/if}"}</a>
+        {/if}
+        {if '{parents:switch="1|2|2|1"}' == '2'}
+            <a href='{parents:url_title_path='guides'}'>{embed="_includes/_card_image_bottom" author="{parents:author}" header="{parents:title}" content="{parents:body_content:limit characters='100'}" image="{if parents:banner_image}{parents:banner_image}{if:else}{banner_image}{/if}"}</a>
+        {/if}
+
+        {if parents:count == parents:total_results}
+        </div>
+        {/if}
+
+        {if parents:no_results}
+        <p class="uk-text-center">No guides for this game yet! Wanna <a href="{path='submissions/game-guide'}">submit</a> one?</p>
+        {/if}
+    {/parents}
+
+    <hr class="uk-divider-icon">
+    {parents field="reviewed_games" limit="4"}
+    {if parents:count == "1"}
+        <h2 class="uk-heading-tiny uk-text-center">Latest News</h2>
+        <div uk-grid>
+            <div class="uk-width-expand@m">
+                <div class="uk-container">
+                    <div class="uk-grid-match uk-child-width-1-4@m" uk-grid>
+    {/if}
+                        <div>
+                            <a href="{parents:url_title_path='news'}">
+                                <div class="uk-card uk-card-default uk-card-body uk-background-cover uk-background-muted uk-height-small" 
+                                {if parents:banner_image} style="background-image: url({parents:banner_image});">
+                                {if:else} style="background-image: url({banner_image});"
+                                {/if}>
+                                <p class="uk-overlay uk-overlay-primary uk-position-bottom" style="padding: 15px;">{parents:title}</p>
+                                </div>
+                            </a>
+                        </div>
+    {if parents:count == parents:total_results}
+                    </div>            
+                </div>
+            </div>
+        </div>
+
+        <hr class="uk-divider-icon">
+    {/if}
+    {/parents}
+
+
+{if game_achievements:total_rows}
+<h2 class="uk-heading-tiny uk-text-center">Achievements</h2>
+
+<ul uk-accordion>
+    {game_achievements}
+    <li>
+        <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-expand@m" uk-leader><img class="uk-margin-small-right" data-src="{game_achievements:achievement_icon}" width="50" height="50" alt="" uk-img>
+            	{game_achievements:achievement_name}</div>
+            <div class="uk-text-middle" style="line-height:3">{game_achievements:achievement_description}</div>
+        </div>
+        <hr class="uk-hidden@m uk-divider-icon">
+    </li>
+    {/game_achievements}
+</ul>
+
+<hr class="uk-divider-icon">
+{/if}
+
+{/exp:channel:entries}
+
+{embed="_includes/_comments" channel_name="games"}
+</div>

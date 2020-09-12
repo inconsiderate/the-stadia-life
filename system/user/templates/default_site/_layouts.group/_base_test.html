@@ -1,0 +1,133 @@
+<html lang="en">
+	<head>
+    
+	{embed="_includes/head"}
+    
+    <title>{if layout:title}{layout:title} - {/if}The Stadia Life</title>
+    
+	<meta property="og:type" content="website" />
+    <meta property="og:url" content="{current_url}" />
+    <meta property="og:title" content="{layout:title}" />
+    <meta property="og:description" content="{layout:description}" />
+    <meta property="og:image" content="https://thestadia.life/assets/site_images/thestadialife_logo.svg" />
+    <meta property="og:site_name" content="The Stadia Life">
+
+    <meta name="twitter:domain" value="{current_url}" />
+    <meta name="twitter:title" value="{layout:title}" />
+    <meta name="twitter:description" value="{layout:description}" />
+    <meta name="twitter:image" content="https://thestadia.life/assets/site_images/thestadialife_logo.svg" />
+    <meta name="twitter:url" value="{current_url}" />
+    <meta name="twitter:site" content="The Stadia Life"> 
+	<meta name="twitter:card" content="summary_large_image">
+    
+	<script data-ad-client="ca-pub-9916141306714493" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+	</head>
+  <body>
+    <div class="uk-background-cover uk-background-secondary" style="background-image: url(/assets/site_images/front_banner.jpg">
+    
+        <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light; top: 200">
+            <nav class="uk-navbar-container">
+                <div class="uk-container uk-container-expand uk-visible@m">
+                    <div uk-navbar>
+                        <ul class="uk-navbar-nav">
+                          	<a href="/" class="{if !segment_1}uk-active{/if} uk-navbar-item uk-logo" href="#"><img data-src="/assets/site_images/thestadialife_logo.svg" alt="" height="75" width="75" uk-img></a>
+                            <li {if segment_1 == 'games'}class="uk-active"{/if}><a href="/games">Games</a></li>
+                            <li {if segment_1 == 'news'}class="uk-active"{/if}><a href="/news">News</a></li>
+                            <li {if segment_1 == 'events'}class="uk-active"{/if}  uk-tooltip="Events Coming Soon!"><a href="#">Events</a></li>
+                            <li {if segment_1 == 'leaderboards'}class="uk-active"{/if}  uk-tooltip="Leaderboards Coming Soon!"><a href="#">Leaderboards</a></li>
+                        </ul>
+                        <ul class="uk-navbar-right">
+                        {if member_group == 1 || member_group == 6}
+						<div><a class="uk-button uk-button-secondary" href="{path='/admin_tools'}" uk-toggle>Admin Tools</a></div>
+                        {/if}
+                        {if logged_in}
+						<div><a class="uk-button uk-button-default" href="{path='logout'}" uk-toggle>Log Out</a></div>
+						<div><a class="uk-button uk-button-secondary" href="{path='member/profile'}" uk-toggle>Profile</a></div>
+                        
+                        {if:else}
+                        <div><a class="uk-button uk-button-default" href="#modal-sections" uk-toggle>Login</a></div>
+						{/if}
+                        </ul>
+                    </div>
+                </div>
+                
+                
+                <div class="uk-navbar-container uk-hidden@m" uk-navbar>
+                    <div class="uk-navbar-center">
+                        <button class="uk-button uk-button-default" type="button" uk-toggle="target: #offcanvas-overlay"><img data-src="/assets/site_images/thestadialife_logo.svg" alt="" height="75" width="75" uk-img></button>
+                    </div>
+                </div>
+
+
+                <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
+                    <div class="uk-offcanvas-bar">
+                        <button class="uk-offcanvas-close" type="button" uk-close></button>
+                            <a href="/" class="{if !segment_1}uk-active{/if} uk-navbar-item uk-logo" href="#"><img data-src="/assets/site_images/thestadialife_logo.svg" alt="" height="50" width="50" uk-img></a>
+                            
+                            <div class="uk-button-group uk-width-1-1 uk-margin-medium-bottom">
+                              <a href="/games"class="uk-button uk-button-default uk-width-1-1 {if segment_1 == 'games'}uk-active{/if}">Games</a>
+                            </div>
+                            <div class="uk-button-group uk-width-1-1 uk-margin-medium-bottom">
+                              <a href="/news" class="uk-button uk-button-default uk-width-1-1 {if segment_1 == 'news'}uk-active{/if}">News</a>
+                            </div>
+                            <div class="uk-button-group uk-width-1-1 uk-margin-medium-bottom">
+                              <a href="/events" class="uk-button uk-button-default uk-width-1-1 {if segment_1 == 'events'}uk-active{/if}">Events</a>
+                            </div>
+                            <div class="uk-button-group uk-width-1-1 uk-margin-medium-bottom">
+                              <a href="/leaderboards"  class="uk-button uk-button-default uk-width-1-1 {if segment_1 == 'leaderboards'}uk-active{/if}">Leaderboards</a>
+                            </div>
+
+                            <br/>
+						{if member_group == 1 || member_group == 6}
+						<div><a class="uk-button uk-button-secondary" href="{path='/admin_tools'}" uk-toggle>Admin Tools</a></div>
+                        {/if}
+                        {if logged_in}
+						<div><a class="uk-button uk-button-default" href="{path='logout'}" uk-toggle>Log Out</a></div>
+						<div><a class="uk-button uk-button-secondary" href="{path='member/profile'}" uk-toggle>Profile</a></div>
+                        {if:else}
+                        <div><a class="uk-button uk-button-default" href="#modal-sections" uk-toggle>Login</a></div>
+						{/if}
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+    {layout:top_content}
+    </div>
+    <div class="uk-section uk-light {if !layout:fullwidth}uk-container{/if}">
+      {layout:contents}
+    </div>
+
+
+
+<div id="modal-sections" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">Login or Register</h2>
+        </div>
+
+        {exp:member:login_form return="/"}
+            <div class="uk-modal-body">
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" placeholder="Username" name="username" value="" maxlength="32" size="25">
+                </div>
+                
+                <div class="uk-margin">
+                    <input class="uk-input" type="password" placeholder="password" name="password" value="" maxlength="32" size="25">
+                </div>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+              	<a href="{path='member/register'}" class="uk-button uk-button-default uk-text-left" type="button">Create Account</a>
+                <button class="uk-button uk-button-primary" type="submit" name="submit">Login</button>
+            </div>
+        {/exp:member:login_form}
+    </div>
+</div>
+
+
+
+    {embed="_includes/scripts"}
+  </body>
+</html>

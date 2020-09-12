@@ -1,0 +1,51 @@
+{layout="_layouts/_base" title='Games'}
+{layout:set name='title'}Games{/layout:set}
+{layout:set name='description'}All the best Stadia games, from your favourite Stadia community site!{/layout:set}
+
+<div id="gamesindex" class="uk-section uk-light uk-container">
+
+{exp:channel:entries channel="games" orderby="random" limit="1" show_future_entries="yes"}
+    <div class="uk-background-norepeat uk-background-cover uk-background-fixed uk-background-center-center uk-height-large uk-width-expand" style="background-image: url({banner_image:article});">
+      <div class="uk-overlay uk-overlay-primary uk-padding-small">
+        <h1 class="uk-heading-medium">Stadia Games</h1>
+      </div>
+    </div>
+{/exp:channel:entries}
+
+<div class="uk-grid-small uk-margin-medium" uk-grid>
+
+	<form method="post" action="{path='_ajax/game_list'}" class="uk-width-expand@s" id="ajax-games">
+    	<input type="hidden" name="csrf_token" value="{csrf_token}" />
+        <div class="uk-form-controls uk-width-1-2@s" uk-form-custom="target: > * > span:first-child">
+            <select name="orderby" class="uk-select" id="form-horizontal-select" onchange='sortFilterGames()'>
+                <option value="/entry_date/desc">Release Date Desc<span uk-icon="icon: chevron-down"></span></option>
+                <option value="/entry_date/asc">Release Date Asc<span uk-icon="icon: chevron-up"></span></option>
+                <option value="/title/asc">Title Asc<span uk-icon="icon: chevron-down"></span></option>
+                <option value="/title/desc">Title Desc<span uk-icon="icon: chevron-up"></span></option>
+            </select>
+			<button class="uk-button uk-button-default" type="button" tabindex="-1">
+                <span></span>
+                <span uk-icon="icon: chevron-down"></span>
+            </button>
+        </div>
+	</form>
+    
+        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid" onchange='sortFilterGames()'>
+            <label><input class="uk-radio" type="radio" value="released" name="filtergames"> Released</label>
+            <label><input class="uk-radio" type="radio" value="pro" name="filtergames"> Pro</label>
+            <label><input class="uk-radio" type="radio" value="upcoming" name="filtergames"> Upcoming</label>
+            <label><input class="uk-radio" type="radio" value="unconfirmed" name="filtergames"> Unconfirmed</label>
+            <label><input class="uk-radio" type="radio" value="" name="filtergames" checked> All</label>
+        </div>
+        
+</div>
+
+    
+<div id="articles" class="uk-child-width-1-4@m uk-grid-match" uk-grid>
+  {embed="_ajax/game_list"}
+</div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/assets/games.js?v1.1" async></script>

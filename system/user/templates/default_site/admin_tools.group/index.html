@@ -1,0 +1,51 @@
+{embed="_includes/head"}
+{layout="_layouts/_base" title='Admin Tools'}
+
+
+<div class="uk-section uk-light uk-container uk-height-viewport">
+	<style>
+	strong {
+	color:red;
+	}
+	</style>
+
+	<div class="uk-container">
+		<br/>
+
+		<br/>
+
+		<h1 class="uk-heading-medium">Admin Tools</h1>
+		<hr class="uk-divider-icon">
+		<br/>
+		<br/>
+		
+		<br/>
+		<div class="uk-grid-small" uk-grid>
+			<div class="uk-width-expand" uk-leader><a href="https://thestadia.life/admin.php">Access Control Panel</a></div>
+			<div>Create new games, news, guides, etc</div>
+		</div>
+		<br/>		<br/>
+
+		<div class="uk-grid-small" uk-grid>
+			<div class="uk-width-expand" uk-leader><a href="/admin_tools/games">Games List</a></div>
+			<div>Games that are missing decriptions, banners, release dates, etc</div>
+		</div>
+
+
+		<div class="uk-grid-small" uk-grid>
+			<div class="uk-width-expand" uk-leader><a href="/admin_tools/guides">Game Guides List</a> </div>
+			<div>User submitted Game Guides that need to be reviewed</div>
+		</div>
+
+
+		<div class="uk-grid-small" uk-grid>
+			<div class="uk-width-expand" uk-leader><a href="/admin_tools/news">News Articles</a> </div>
+			<div>{exp:channel:entries sticky="only" channel="news"}{total_results}{/exp:channel:entries} sticky posts found (if there's more than 1, clean it up!)</div>
+		</div>
+		
+		
+		
+		</div>
+
+
+</div>

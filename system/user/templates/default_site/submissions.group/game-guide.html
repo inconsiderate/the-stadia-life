@@ -1,0 +1,82 @@
+{layout="_layouts/_base" title='Game Guide Submission'}
+
+<div class="uk-section uk-light uk-container uk-height-viewport">
+
+{layout:set name='title'}Submit a Game Guide to The Stadia Life{/layout:set}
+{layout:set name='description'}Have a great strategy or walkthrough for a The Stadia game? Let the world hear your voice!{/layout:set}
+
+<link href="{path='css/_ee_channel_form_css'}" type="text/css" rel="stylesheet" media="screen">
+
+
+  <h1 class="uk-heading-small">Game Guide Submission</h1>
+        
+  {if logged_out}  
+	  <h1 class="uk-heading-small">Sorry, you must be logged in to submit a game guide.</h1>
+
+      {if:else}  
+
+<p>Game guides will be reviewed by TSL. Please avoid the use of any language or content that would not be considered PG-13.</p>
+<p>General tips and suggestions for good guides:</p>
+<ul>
+<li>Be clear, be concise. Don't ramble on. State your point and move on. Avoid being redundant. Don't repeat the same thing over and over to get your point across. Don't do this.</li>
+<li>If you want to cover multiple topics, make multiple guides. :)</li>
+<li>Want to upload a video instead? <a href="mailto:contact@thestadia.life">Contact us!</a> We'll hook you up.</li>
+</ul>
+
+
+{exp:channel:form channel="game_guides" return="guides/URL_TITLE" url_title="{segment_3}" rte_selector="#body_content"}
+
+<div class="uk-container">
+    <fieldset class="uk-fieldset">
+        <div class="uk-margin">
+            <label class="uk-form-label uk-text-primary" for="form-stacked-text">Title of your Guide</label>
+            <div class="uk-form-controls">
+                <input required class="uk-input" type="text" name="title" id="title" value="{title}" onkeyup="liveUrlTitle(event);">
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label uk-text-primary" for="form-stacked-text">URL Title (don't change this unless there's weird characters in it, we trust you)</label>
+            <div class="uk-form-controls">
+                <input required class="uk-input" type="text" name="url_title" id="url_title" value="{url_title}" maxlength="75" size="50">
+            </div>
+        </div>
+        
+        <input required type="hidden" name="entry_date" id="entry_date" value="{entry_date}" maxlength="23" size="25">
+
+        <div class="uk-margin">
+            <label class="uk-form-label uk-text-primary" for="form-stacked-text">Guide Banner Image (1920x1080 - if empty, we will display the image for the related game)</label>
+            <input class="uk-button uk-button-success" type="file" name="banner_image" />
+			<input type="hidden" name="banner_image_directory" value="6" />
+            <input type="hidden" name="banner_image_hidden_file" value="{banner_image}{file_name}{/banner_image}" />
+        </div>
+
+        <div class="uk-margin uk-width-1-3">
+            <div uk-form-custom="target: > * > span:first-child">
+                <select required name="related_game[data][]" id="related_game">
+                	<option>For Which Game?</option>
+                    {options:related_game}
+                      <option value="{option_value}"{selected}>{option_name}</option>
+                    {/options:related_game}
+                </select>
+                <button class="uk-button uk-button-success" type="button" tabindex="-1">
+                    <span></span>
+                    <span uk-icon="icon: chevron-down"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label uk-text-primary" for="form-stacked-text">Guide Content (go nuts. we recommend using Heading 3 for subheadings)</label>
+            <textarea class="uk-textarea"  name="body_content" id="body_content" cols="90" rows="10">{body_content}</textarea>
+        </div>
+        
+		<button class="uk-button uk-button-success uk-align-right" type="submit" name="submit" tabindex="-1">Submit</button>
+
+    </fieldset>
+</div>
+
+    
+{/exp:channel:form}
+  {/if}
+</div>

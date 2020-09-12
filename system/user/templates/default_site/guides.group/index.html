@@ -1,0 +1,39 @@
+{layout="_layouts/_base"}
+<div class="uk-section uk-light uk-container">
+{exp:channel:entries channel="game_guides" limit="1" disable="categories|pagination"}
+
+{layout:set name='title'}{title}{/layout:set}
+{layout:set name='description'}{body_content:limit characters='222'}{/layout:set}
+{layout:set name='image'}{banner_image:embed}{/layout:set}
+
+<div class="uk-inline">
+  <img style="min-height: 250px;" src="{if banner_image}{banner_image}{if:else}{related_game:banner_image}{/if}" alt="">
+  
+  <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-small ">
+    <div class="uk-heading-small uk-align-left uk-margin-remove">
+    <h1 class="uk-heading-small uk-margin-remove">{title}</h1>
+    {related_game}
+    <p class="uk-text-lead uk-margin-remove"><a href="/games/{related_game:url_title}">{related_game:title}</a></p></div>
+    {/related_game}
+    <h1 class="uk-visible@m uk-margin-small-top uk-margin-medium-right uk-align-right uk-margin-small-bottom uk-text-large">Written by: {author}</h1>
+  </div>
+</div>
+
+{if logged_in_member_id == author_id}
+	<a class="uk-button-default uk-margin-small-top uk-margin-medium-right uk-align-right uk-button-large uk-margin-small-bottom " href="/submissions/game-guide/{url_title}">Edit</a>
+{/if}
+
+
+    <h1 class="uk-hidden@m uk-text-large">Written by: {author}</h1>
+    
+<div class="uk-container uk-margin-large-top">
+    {body_content}
+</div>
+
+{/exp:channel:entries}
+
+<hr class="uk-divider-icon">
+
+{embed="_includes/_comments" channel_name="game_guides"}
+
+</div>

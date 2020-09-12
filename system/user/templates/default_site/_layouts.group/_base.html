@@ -1,0 +1,77 @@
+<html lang="en">
+	<head>
+    
+	{embed="_includes/head"}
+    
+    <title>The Stadia Life{if layout:title} - {layout:title}{/if}</title>
+    
+    <link rel="canonical" href="{current_url}" />
+    
+	<meta property="og:type" content="website" />
+    <meta property="og:url" content="{current_url}" />
+    <meta property="og:title" content="{if layout:title}{layout:title}{if:else}The Stadia Life{/if}" />
+    <meta property="og:description" content="{if layout:description}{layout:description}{if:else}The number one community site for all things Stadia{/if}" />
+    <meta property="og:site_name" content="The Stadia Life">
+    
+    {if layout:image}
+        <meta property="og:image" content="{layout:image}" />
+        <meta property="og:image:width" content="1200" />
+    	<meta property="og:image:height" content="630" />
+    {if:else}
+		<meta property="og:image" content="https://thestadia.life/images/uploads/achievements/_embed/thestadialife_discordlogo_transparent.png" />
+        <meta property="og:image:width" content="250" />
+    	<meta property="og:image:height" content="250" />
+    {/if}
+
+    <meta name="twitter:domain" value="{current_url}" />
+    <meta name="twitter:title" value="The Stadia Life{if layout:title}{layout:title}{if:else}The Stadia Life{/if}" />
+    <meta name="twitter:description" value="{if layout:description}{layout:description}{if:else}The number one community site for all things Stadia{/if}" />
+    <meta name="twitter:image" content="{if layout:image}{layout:image}{if:else}https://thestadia.life/images/uploads/achievements/_embed/thestadialife_discordlogo_transparent.png{/if}" />
+    <meta name="twitter:url" value="{current_url}" />
+    <meta name="twitter:site" content="The Stadia Life"> 
+	<meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:image:width" content="250" />
+    <meta property="twitter:image:height" content="250" />
+    
+	<script data-ad-client="ca-pub-9916141306714493" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+	</head>
+  <body>
+    <div class="uk-section-primary uk-preserve-color" style="background-repeat: no-repeat; background-image: linear-gradient(to bottom, transparent, #4a349a), url(/assets/site_images/front_banner.jpg);"
+    >
+
+        {embed="_includes/_navbar"}
+        {layout:contents}
+    </div>
+
+
+    <div id="modal-sections" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Login or Register</h2>
+            </div>
+
+            {exp:member:login_form return="/"}
+                <div class="uk-modal-body">
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" placeholder="username" name="username" value="" maxlength="32" size="25">
+                    </div>
+
+                    <div class="uk-margin">
+                        <input class="uk-input" type="password" placeholder="password" name="password" value="" maxlength="32" size="25">
+                    </div>
+                	<p><a href="{path='member/forgot_password'}">Forgot your password?</a></p>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <a href="{path='member/register'}" class="uk-button uk-button-default uk-text-left" type="button">Create Account</a>
+                    <button class="uk-button uk-button-primary" type="submit" name="submit">Login</button>
+                </div>
+            {/exp:member:login_form}
+        </div>
+    </div>
+
+    {embed="_includes/_footer"}
+    {embed="_includes/scripts"}
+  </body>
+</html>

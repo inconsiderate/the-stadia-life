@@ -1,0 +1,56 @@
+<h2 class="uk-text-lead" id="comments">Comments</h2>
+{exp:comment:entries sort="desc" limit="20"}
+
+{if no_results}<p class="uk-text-small">No comments yet! Why not be the first?</p>{/if}
+
+<article class="uk-comment">
+    <header class="uk-comment-header">
+        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+            <div class="uk-width-auto">
+                {if avatar_url}<img class="uk-comment-avatar" src="{avatar_url}" width="40" height="40" alt="">{/if}
+            </div>
+            <div class="uk-width-expand">
+                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{name}</a></h4>
+                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                    <li><a href="#">{comment_date:relative}</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="uk-comment-body">
+        {comment}
+    </div>
+</article>
+{if count != total_results}
+<hr class="uk-divider-small">
+{/if}
+{/exp:comment:entries}
+
+<hr class="uk-divider-icon">
+<h2 class="uk-text-lead ">Leave a Comment</h2>
+{if logged_out}
+	<p>You must be logged in to leave a comment.</p>
+{if:else}
+	{exp:comment:form channel="{embed:channel_name}"}
+        <div class="uk-margin">
+            <textarea class="uk-textarea" name="comment" rows="4"></textarea>
+        </div>
+
+        <button class="uk-button uk-button-default uk-align-right" type="submit" name="submit" value="Submit">Submit</button>
+
+        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+            <label><input class="uk-checkbox" type="checkbox" checked name="notify_me" value="yes" {notify_me} > Notify me of follow-up comments?</label>
+        </div>
+
+        {if captcha}
+        <label for="captcha">Please enter the word you see in the image below:</label><br />
+        <p>{captcha}<br />
+
+        <div class="uk-margin">
+          <input class="uk-input" type="text" name="captcha" value="{captcha_word}" maxlength="20" >
+        </div>
+        {/if}
+
+    {/exp:comment:form}
+
+{/if}

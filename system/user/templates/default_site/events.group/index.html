@@ -1,0 +1,62 @@
+{layout="_layouts/_base"}
+
+<div class="uk-section uk-light uk-container">
+
+
+<h2 class="uk-heading">Current Events</h2>
+{exp:channel:entries channel="events" show_future_entries="yes" order_by="entry_date" sort="asc"}
+    <div>
+        <div class="uk-background-cover uk-background-muted uk-height-medium uk-panel uk-flex uk-flex-center uk-flex-middle" style="height: 175px;background-image: url({if banner_image}{banner_image:article}
+		{if:else}{related_game show_future_entries="yes"}{related_game:banner_image:article}{/related_game}
+        {/if});">
+	        <div class="uk-overlay-primary uk-position-cover uk-overlay uk-position-bottom uk-light uk-section">
+				<h3 class="uk-text-large"><a href="{url_title_path='events'}">{title}</a></h3>
+
+                <div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <p>{entry_date format="%M %j, %Y"}{if expiration_date} - {expiration_date format="%M %j, %Y"}{/if}</p>
+                    </div>
+                    <div>
+                        <p class="uk-visible@m">{body_content:limit characters="150"}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+  <br/>
+  
+	{if no_results}
+	<div>
+		<p class="uk-text-large uk-light">No current events! Wanna <a href="https://thestadia.life/submissions/event">submit your event</a> to the list?</p>
+    </div>
+	{/if}
+                        
+{/exp:channel:entries}
+
+<h2 class="uk-heading">Past Events</h2>
+{exp:channel:entries channel="events" show_expired="yes" order_by="entry_date" sort="desc"}
+{if current_time > expiration_date}
+    <div>
+        <div class="uk-background-cover uk-background-muted uk-height-medium uk-panel uk-flex uk-flex-center uk-flex-middle" style="height: 175px;background-image: url({if banner_image}{banner_image:article}
+		{if:else}{related_game show_future_entries="yes"}{related_game:banner_image:article}{/related_game}
+        {/if});">
+	        <div class="uk-overlay-primary uk-position-cover uk-overlay uk-position-bottom uk-light uk-section">
+				<h3 class="uk-text-large"><a href="{url_title_path='events'}">{title}</a></h3>
+
+                <div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <p >{entry_date format="%M %j, %Y"}{if expiration_date} - {expiration_date format="%M %j, %Y"}{/if}</p>
+                    </div>
+                    <div>
+                        <p class="uk-visible@m">{body_content:limit characters="150"}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    {/if}
+{/exp:channel:entries}
+</div>

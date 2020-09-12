@@ -1,0 +1,120 @@
+{if segment_6 == 'pro'}
+	{exp:channel:entries
+        channel="monthly_pro_games"
+        year="{current_time format='%Y'}" month="{current_time format='%m'}"
+        dynamic="no"}
+        {monthly_pro_all sort="{segment_5}" orderby="{segment_4}" show_future_entries="yes"}
+        <div class="uk-grid-match">
+            <a href="{monthly_pro_all:url_title_path='games'}">
+                <div class="uk-card uk-card-hover uk-card-secondary uk-width-2-3 uk-width-expand@m">
+                    <div class="uk-card-media-top">
+                        <img style="width: 100%;object-fit: cover;height: 152px;" class="uk-visible@m" data-src="{monthly_pro_all:banner_image:article}" alt="{monthly_pro_all:title} Image" uk-img>
+                            {if monthly_pro_all:entry_date > current_time}
+                        <div class="uk-overlay uk-position-top-right uk-visible@m " style="padding: 10px;">
+                                <span class="uk-label">
+                                    {monthly_pro_all:entry_date:relative}
+                                </span>
+                                </div>
+                            {/if}
+                    </div>
+                    <div class="uk-card-header uk-padding-small">
+                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-expand">
+                                <h3 class="uk-card-title uk-margin-remove-bottom">{monthly_pro_all:title}</h3>
+                                <p class="uk-text-meta uk-margin-remove-top">
+									{if monthly_pro_all:entry_date}
+                                        <time>{monthly_pro_all:entry_date format="%M %j%S, %Y"}</time>
+                                    {/if}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-card-footer uk-padding-small">
+                      <p class="uk-flex uk-flex-between">
+                        {if monthly_pro_all:game_achievements:total_rows}
+                            <span class="uk-flex" uk-tooltip="{monthly_pro_all:game_achievements:total_rows} Achievements">{monthly_pro_all:game_achievements:total_rows} <i class="material-icons">empji_events</i></span>
+                        {/if}
+                        {monthly_pro_all:parents field="related_game"}
+                        {if parents:count == 1}
+                        <span uk-tooltip="{monthly_pro_all:parents:total_results} Guides" class="uk-flex uk-text-right uk-width-1-2">{monthly_pro_all:parents:total_results} <i class="material-icons">map</i></span>
+                        {/if}
+                        {/monthly_pro_all:parents}
+                      </p>
+                    </div>
+                </div>
+                <img class="uk-width-expand uk-hidden@m" data-src="{monthly_pro_all:banner_image:article}" alt="{monthly_pro_all:title} Image" style="object-fit: cover;" uk-img>
+            </a>
+        </div>
+        {/monthly_pro_all}
+	{/exp:channel:entries}
+    
+    
+{if:else}
+
+	{exp:channel:entries 
+        channel="games" 
+        sort="{segment_5}" 
+        orderby="{segment_4}" 
+        {if segment_6 == 'upcoming'}show_future_entries="yes" start_on="{current_time format='%Y-%m-%d %H:%i'}"{/if}
+        {if segment_6 == 'unconfirmed'}search:expected_release="not IS_EMPTY"{/if}
+        {if segment_6 == 'released'}search:expected_release="IS_EMPTY"{/if}
+        limit="12" paginate="bottom" paginate_base="_ajax/game_list" dynamic="no"}
+        <div class="uk-grid-match">
+            <a href="{url_title_path='games'}">
+                <div class="uk-card uk-card-hover uk-card-secondary uk-width-2-3 uk-width-expand@m">
+                    <div class="uk-card-media-top">
+                        <img style="width: 100%;object-fit: cover;height: 152px;" class="uk-visible@m" data-src="{banner_image:article}" alt="{title} Image" uk-img>
+                            {if entry_date > current_time}
+                        <div class="uk-overlay uk-position-top-right uk-visible@m" style="padding: 10px;">
+                                <span class="uk-label">
+                                    {entry_date:relative}
+                                </span>
+                                </div>
+                            {/if}
+                    </div>
+                    <div class="uk-card-header uk-padding-small">
+                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-expand">
+                                <h3 class="uk-card-title uk-margin-remove-bottom">{title}</h3>
+                                <p class="uk-text-meta uk-margin-remove-top">
+                                    {if expected_release}
+                                        <time>{expected_release}</time>
+                                    {if:else}
+                                        {if entry_date}
+                                            <time>{entry_date format="%M %j%S, %Y"}</time>
+                                        {/if}
+                                    {/if}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-card-footer uk-padding-small">
+                      <p class="uk-flex uk-flex-between">
+                        {if game_achievements:total_rows}
+                            <span class="uk-flex" uk-tooltip="{game_achievements:total_rows} Achievements">{game_achievements:total_rows} <i class="material-icons">emoji_events</i></span>
+                        {/if}
+                        {parents field="related_game"}
+                        {if parents:count == 1}
+                        <span uk-tooltip="{parents:total_results} Guides" class="uk-flex uk-text-right uk-width-1-2">{parents:total_results} <i class="material-icons">map</i></span>
+                        {/if}
+                        {/parents}
+                      </p>
+                    </div>
+                </div>
+				<img uk-img class="uk-width-expand uk-hidden@m" data-src="{banner_image:article}" alt="{title} Image" style="object-fit:cover;">
+            </a>
+        </div>
+        {paginate}
+            {pagination_links}
+                <div class="pagination uk-align-center">
+                    {next_page}
+                        <div class="uk-flex uk-flex-center"><a href="{pagination_url}"><span class="spinner" uk-spinner="ratio: 3"></span></a></div>
+                        <span id="ajaxidentifier"></span>
+                    {/next_page}
+                </div>
+            {/pagination_links}
+        {/paginate}
+	{/exp:channel:entries}
+{/if}

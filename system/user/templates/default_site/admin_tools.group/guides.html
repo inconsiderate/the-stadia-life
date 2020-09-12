@@ -1,0 +1,37 @@
+{embed="_includes/head"}
+{layout="_layouts/_base" title='Games'}
+
+
+<div class="uk-section uk-light uk-container uk-height-viewport">
+<style>
+strong {
+color:red;
+}
+</style>
+
+<div class="uk-container">
+
+<h1 class="uk-heading-medium">Game Guides that need to be reviewed</h1>
+
+<table class="uk-table uk-table-striped">
+  <tr>
+    <th>Title</th>
+    <th>Related Game</th>
+    <th>Author</th>
+    <th>Edit Link</th>
+  </tr>
+  {exp:channel:entries channel="game_guides" orderby="title" sort="asc" status="Closed"}
+
+  <tr>
+    <td>{title}</td>
+    <td>{related_game}{related_game:title}{/related_game}</td>
+    <td>{author}</td>
+    <td><a href="https://thestadia.life/admin.php?/cp/publish/edit/entry/{entry_id}">Edit Me<a/></td>
+  </tr>
+{/exp:channel:entries}
+
+
+</table>
+</div>
+</div>
+
