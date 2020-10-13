@@ -1,0 +1,32 @@
+{layout="_layouts/_base" title='Games'}
+<div class="uk-section uk-container uk-height-viewport">
+
+		{exp:channel:entries channel="games" show_future_entries="yes" search:expected_release="IS_EMPTY" dynamic="no" orderby="title" sort="asc" start_on="January 1st, {segment_2}" stop_before="December 31st, {segment_2}"}
+			{if count == 1}
+	            <h2 class="uk-text-large">Search for "{segment_2}" returned {total_results} results.</h2>
+			    <div class="uk-child-width-1-1@m uk-height-match='target: > div > .uk-first-column'" uk-grid>
+            {/if}
+            <a href='{url_title_path='games'}' class="uk-margin-remove">
+            <div>
+              <div class="uk-card uk-card-small">
+                <div class="uk-card-body uk-padding-remove">
+                  <h3 class="uk-card-title">{title}{if channel_name != 'games'}<br/><span class="uk-text-small">by {author}</span>{/if}</h3>
+                </div>
+              </div>
+            </div>
+			</a>
+            
+{if count == total_results}
+    </div>
+{/if}
+    
+      	{/exp:channel:entries}
+
+
+
+<h1 class="uk-header-small">Not what you're looking for?</h1>
+{embed="search/_search_buttons"}
+
+</div>
+
+

@@ -1,28 +1,44 @@
 {layout="_layouts/_base" title='Games'}
+<div class="uk-section uk-container uk-height-viewport">
 
+<h2 class="uk-text-large">Search for "{exp:search:keywords}" returned {exp:search:total_results} results.</h2>
+<div uk-filter="target: .js-filter">
+    <ul class="uk-subnav uk-subnav-pill">
+	    <li class="uk-active" uk-filter-control><a href="#">All</a></li>
+        <li uk-filter-control=".tag-news"><a href="#">News</a></li>
+		<li uk-filter-control=".tag-games"><a href="#">Games</a></li>
+        <li uk-filter-control=".tag-events"><a href="#">Events</a></li>
+        <li uk-filter-control=".tag-game_guides"><a href="#">Game Guides</a></li>
+    </ul>
 
-<div class="uk-section uk-light uk-container uk-height-viewport">
-    <h2 class="uk-heading-tiny uk-text-center">Please bear with us as we are improving the results page.</h2>
-<table class="uk-table" border="0" cellpadding="6" cellspacing="1" width="100%">
-    <tr>
-        <th>Type</th>
-        <th>{lang:title}</th>
-        <th>{lang:date}</th>
-        <th>{lang:total_comments}</th>
-    </tr>
+    <div class="js-filter uk-child-width-1-4@m uk-height-match='target: > div > .uk-first-column'" uk-grid>
+		{exp:search:search_results limit="1" paginate="bottom"}
+            <a href='{auto_path}' class="tag-{channel_name}">
+            <div>
+              <div class="uk-card uk-card-small">
+                <div class="uk-card-media-top">
+                  <img src="{if banner_image || news_banner}{banner_image}{news_banner}{if:else}{related_game:banner_image}{/if}" alt="">
+                </div>
+                <div class="uk-card-body uk-padding-remove">
+                  <h3 class="uk-card-title">{title}{if channel_name != 'games'}<br/><span class="uk-text-small">by {author}</span>{/if}</h3>
+                </div>
+              </div>
+            </div>
+			</a>
+            
+                {paginate}
+                    <p>Page {current_page} of {total_pages} pages {pagination_links}</p>
+                {/paginate}
+    
+      	{/exp:search:search_results}
+    </div>
 
-{exp:search:search_results channel="games"}
-    <tr class="{switch="resultRowOne|resultRowTwo"}">
-        <td width="10%" valign="top">{channel}</td>
-        <td width="30%" valign="top"><b><a href="{auto_path}">{title}</a></b></td>
-        <td width="10%" valign="top">{entry_date format="%m/%d/%y"}</td>
-        <td width="10%" valign="top">{comment_total}</td>
-    </tr>
-
-    {paginate}
-        <p>Page {current_page} of {total_pages} pages {pagination_links}</p>
-    {/paginate}
-{/exp:search:search_results}
-
-</table>
 </div>
+
+
+<h1 class="uk-header-small">Not what you're looking for?</h1>
+{embed="search/_search_buttons"}
+
+</div>
+
+

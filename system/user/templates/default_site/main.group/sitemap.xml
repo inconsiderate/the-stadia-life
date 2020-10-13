@@ -15,5 +15,4 @@
 	  <lastmod>{edit_date format="%Y-%m-%dT06:00:00+00:00"}</lastmod>
 	  <changefreq>weekly</changefreq>
 	</url>
-{/exp:channel:entries}
-</urlset>
+{/exp:channel:entries}</urlset>

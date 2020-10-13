@@ -1,6 +1,6 @@
 {layout="_layouts/_base" title='Game Guide Submission'}
 
-<div class="uk-section uk-light uk-container uk-height-viewport">
+<div class="uk-section uk-container uk-height-viewport">
 
 {layout:set name='title'}Submit a Game Guide to The Stadia Life{/layout:set}
 {layout:set name='description'}Have a great strategy or walkthrough for a The Stadia game? Let the world hear your voice!{/layout:set}
@@ -29,14 +29,14 @@
 <div class="uk-container">
     <fieldset class="uk-fieldset">
         <div class="uk-margin">
-            <label class="uk-form-label uk-text-primary" for="form-stacked-text">Title of your Guide</label>
+            <label class="uk-form-label" for="form-stacked-text">Title of your Guide</label>
             <div class="uk-form-controls">
                 <input required class="uk-input" type="text" name="title" id="title" value="{title}" onkeyup="liveUrlTitle(event);">
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label uk-text-primary" for="form-stacked-text">URL Title (don't change this unless there's weird characters in it, we trust you)</label>
+            <label class="uk-form-label" for="form-stacked-text">URL Title (don't change this unless there's weird characters in it, we trust you)</label>
             <div class="uk-form-controls">
                 <input required class="uk-input" type="text" name="url_title" id="url_title" value="{url_title}" maxlength="75" size="50">
             </div>
@@ -45,7 +45,7 @@
         <input required type="hidden" name="entry_date" id="entry_date" value="{entry_date}" maxlength="23" size="25">
 
         <div class="uk-margin">
-            <label class="uk-form-label uk-text-primary" for="form-stacked-text">Guide Banner Image (1920x1080 - if empty, we will display the image for the related game)</label>
+            <label class="uk-form-label" for="form-stacked-text">Guide Banner Image (1920x1080 - if empty, we will display the image for the related game)</label>
             <input class="uk-button uk-button-success" type="file" name="banner_image" />
 			<input type="hidden" name="banner_image_directory" value="6" />
             <input type="hidden" name="banner_image_hidden_file" value="{banner_image}{file_name}{/banner_image}" />
@@ -67,7 +67,7 @@
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label uk-text-primary" for="form-stacked-text">Guide Content (go nuts. we recommend using Heading 3 for subheadings)</label>
+            <label class="uk-form-label" for="form-stacked-text">Guide Content (go nuts. we recommend using Heading 3 for subheadings)</label>
             <textarea class="uk-textarea"  name="body_content" id="body_content" cols="90" rows="10">{body_content}</textarea>
         </div>
         

@@ -1,9 +1,9 @@
 {layout="_layouts/_base"}
    
-<div class="uk-light">
+<div>
     <div class="uk-grid uk-container" uk-grid style="margin:auto">
 
-            <div class="uk-container uk-light uk-margin-medium-top uk-padding uk-width-expand@m">
+            <div class="uk-container uk-margin-medium-top uk-padding uk-width-expand@m">
 
             {exp:channel:entries channel="events" show_future_entries="yes" show_expired="yes" }
                 {layout:set name='title'}{title}{/layout:set}
@@ -25,7 +25,7 @@
                     {/if}
               	" width="" height="" alt="" uk-img>
     
-                <article class="uk-article uk-padding uk-margin-top" style="background-color:#303136d9">
+                <article class="uk-article uk-padding uk-margin-top">
                     <h1 class="uk-article-title">{title}</h1>
                     <h1 class="uk-text-large">When: {entry_date format="%M %j, %Y %g%A"}{if expiration_date} - {expiration_date format="%M %j, %Y %g%A"}{/if} Pacific</h1>                    
                     <h1 class="uk-text-large" style="margin-top:0">Organizer: {author}</h1>

@@ -4,9 +4,10 @@
         year="{current_time format='%Y'}" month="{current_time format='%m'}"
         dynamic="no"}
         {monthly_pro_all sort="{segment_5}" orderby="{segment_4}" show_future_entries="yes"}
+
         <div class="uk-grid-match">
             <a href="{monthly_pro_all:url_title_path='games'}">
-                <div class="uk-card uk-card-hover uk-card-secondary uk-width-2-3 uk-width-expand@m">
+                <div class="uk-card uk-card-hover uk-card-default uk-width-2-3 uk-width-expand@m">
                     <div class="uk-card-media-top">
                         <img style="width: 100%;object-fit: cover;height: 152px;" class="uk-visible@m" data-src="{monthly_pro_all:banner_image:article}" alt="{monthly_pro_all:title} Image" uk-img>
                             {if monthly_pro_all:entry_date > current_time}
@@ -17,7 +18,7 @@
                                 </div>
                             {/if}
                     </div>
-                    <div class="uk-card-header uk-padding-small">
+                    <div class="uk-card-body uk-padding-small">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">{monthly_pro_all:title}</h3>
@@ -30,12 +31,12 @@
                         </div>
                     </div>
 
-                    <div class="uk-card-footer uk-padding-small">
+                    <div class="uk-card-body uk-padding-small">
                       <p class="uk-flex uk-flex-between">
                         {if monthly_pro_all:game_achievements:total_rows}
                             <span class="uk-flex" uk-tooltip="{monthly_pro_all:game_achievements:total_rows} Achievements">{monthly_pro_all:game_achievements:total_rows} <i class="material-icons">empji_events</i></span>
                         {/if}
-                        {monthly_pro_all:parents field="related_game"}
+                        {monthly_pro_all:parents channel="game_guides"}
                         {if parents:count == 1}
                         <span uk-tooltip="{monthly_pro_all:parents:total_results} Guides" class="uk-flex uk-text-right uk-width-1-2">{monthly_pro_all:parents:total_results} <i class="material-icons">map</i></span>
                         {/if}
@@ -55,17 +56,19 @@
 	{exp:channel:entries 
         channel="games" 
         sort="{segment_5}" 
-        orderby="{segment_4}" 
-        {if segment_6 == 'upcoming'}show_future_entries="yes" start_on="{current_time format='%Y-%m-%d %H:%i'}"{/if}
-        {if segment_6 == 'unconfirmed'}search:expected_release="not IS_EMPTY"{/if}
+        orderby="{segment_4}"
+        {if segment_6 == ''}show_future_entries="yes"{/if}
+        {if segment_6 == 'upcoming'}show_future_entries="yes" start_on="today" search:expected_release="IS_EMPTY"{/if}
+        {if segment_6 == 'unconfirmed'}search:expected_release="not IS_EMPTY" show_future_entries="yes"{/if}
         {if segment_6 == 'released'}search:expected_release="IS_EMPTY"{/if}
         limit="12" paginate="bottom" paginate_base="_ajax/game_list" dynamic="no"}
+
         <div class="uk-grid-match">
             <a href="{url_title_path='games'}">
-                <div class="uk-card uk-card-hover uk-card-secondary uk-width-2-3 uk-width-expand@m">
+                <div class="uk-card uk-card-hover uk-card-default uk-width-2-3 uk-width-expand@m">
                     <div class="uk-card-media-top">
                         <img style="width: 100%;object-fit: cover;height: 152px;" class="uk-visible@m" data-src="{banner_image:article}" alt="{title} Image" uk-img>
-                            {if entry_date > current_time}
+                            {if entry_date > current_time && expected_release == ""}
                         <div class="uk-overlay uk-position-top-right uk-visible@m" style="padding: 10px;">
                                 <span class="uk-label">
                                     {entry_date:relative}
@@ -73,7 +76,7 @@
                                 </div>
                             {/if}
                     </div>
-                    <div class="uk-card-header uk-padding-small">
+                    <div class="uk-card-body uk-padding-small">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">{title}</h3>
@@ -90,12 +93,12 @@
                         </div>
                     </div>
 
-                    <div class="uk-card-footer uk-padding-small">
+                    <div class="uk-card-body uk-padding-small">
                       <p class="uk-flex uk-flex-between">
                         {if game_achievements:total_rows}
                             <span class="uk-flex" uk-tooltip="{game_achievements:total_rows} Achievements">{game_achievements:total_rows} <i class="material-icons">emoji_events</i></span>
                         {/if}
-                        {parents field="related_game"}
+                        {parents channel="game_guides"}
                         {if parents:count == 1}
                         <span uk-tooltip="{parents:total_results} Guides" class="uk-flex uk-text-right uk-width-1-2">{parents:total_results} <i class="material-icons">map</i></span>
                         {/if}

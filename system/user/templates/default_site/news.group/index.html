@@ -1,16 +1,25 @@
 {layout="_layouts/_base"}
 
 {layout:set name='title'}Stadia News{/layout:set}
-{layout:set name='title'}Latest News{/layout:set}
 {layout:set name='description'}All the latest news, from your favourite Stadia community site!{/layout:set}
                 
-<div class="uk-section uk-light uk-container">
+<div class="uk-section uk-container">
 
+    {if segment_2 == 'category'}
+		{layout:set name='title'}{segment_3_category_id}{/layout:set}
+    	<h1 style="text-transform:capitalize;" class="uk-heading-medium uk-heading-line">Articles - {segment_3_category_name}</h1>
+  	{if:else}
+    	<h1 class="uk-heading-medium uk-heading-line">Latest News</h1>
+	{/if}
     
-    <h1 class="uk-heading-medium uk-heading-line">Latest News</h1>
-<div class="uk-child-width-1-2@m uk-grid-match uk-grid-large" uk-grid>
+    <ul class="uk-subnav uk-subnav-divider" uk-margin>
+		{exp:channel:categories style="linear"}
+            <li><a href="/news/category/{category_url_title}">{category_name}</a></li>
+        {/exp:channel:categories}
+    </ul>
+    <div class="uk-child-width-1-2@m uk-grid-match uk-grid-large" uk-grid>
     
-    {exp:channel:entries channel="news"}
+    {exp:channel:entries channel="news" {if segment_2 == "category"}category="{segment_3_category_id}" dynamic="no"{/if}}
         <div>
         <a class="uk-link-reset" href="{url_title_path='news'}">
             <div class="uk-card uk-card-body" uk-grid style="background: none">
@@ -33,7 +42,7 @@
                     {news_body}
                         {news_body:body_content}
                         {if {news_body:count name="body_content"} == "1"}
-                            <div class="uk-text-primary uk-margin-small">{content:limit characters="135"}</div>
+                            <div class="uk-text-default uk-margin-small">{content:limit characters="135"}</div>
                         {/if}
                         {/news_body:body_content}
                     {/news_body}            

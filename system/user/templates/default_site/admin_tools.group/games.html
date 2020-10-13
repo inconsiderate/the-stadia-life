@@ -2,7 +2,7 @@
 {layout="_layouts/_base" title='Games'}
 
 
-<div class="uk-section uk-light uk-container uk-height-viewport">
+<div class="uk-secuk-container uk-height-viewport">
 <style>
 strong {
 color:red;
@@ -56,30 +56,15 @@ color:red;
     <th>Banner</th>
     <th>Expected Date</th>
     <th>Description</th>
-    <th>Cheevs</th>
-    <th>Secret Cheeves</th>
-    <th>Play Link</th>
     <th>Trailer</th>
   </tr>
   {exp:channel:entries channel="games" orderby="title" sort="asc" show_future_entries="yes" limit="1400" start_on="{current_time format='%Y-%m-%d %H:%i'}" show_future_entries="yes"}
 
   <tr>
-    <td class="{if banner_image && body_content && !expected_release && play_now_link && official_trailer && game_achievements:total_rows}uk-text-success{if:else}uk-text-danger{/if}"><a class="uk-link-reset" href="https://thestadia.life/admin.php?/cp/publish/edit/entry/{entry_id}">{title}</a></td>
+    <td class="{if banner_image && body_content && !expected_release && official_trailer}uk-text-success{if:else}uk-text-danger{/if}"><a class="uk-link-reset" href="https://thestadia.life/admin.php?/cp/publish/edit/entry/{entry_id}">{title}</a></td>
     <td>{if banner_image}{if:else}<strong>NO</strong>{/if}</td>
     <td>{if expected_release}<strong>YES</strong>{if:else}{/if}</td>
     <td>{if body_content}{if:else}<strong>NO</strong>{/if}</td>
-    <td>{if game_achievements:total_rows > 0 || expected_release || entry_date > current_time}{if:else}<strong>NO</strong>{/if}</td>
-    
-    <td>
-    {game_achievements 
-        search:achievement_name="secret achievement"
-    }
-    <strong>YES</strong>
-    {/game_achievements}
-    </td>
-    
-    <td>{if play_now_link}{if:else}<strong>NO</strong>{/if}</td> 
-    
     <td>{if official_trailer}{if:else}<strong>NO</strong>{/if}</td> 
 
   </tr>

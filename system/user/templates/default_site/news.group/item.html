@@ -1,9 +1,9 @@
 {layout="_layouts/_base"}
    
-<div class="uk-light">
+<div>
     <div class="uk-grid uk-container" uk-grid style="margin:auto">
 
-            <div class="uk-container uk-light uk-margin-medium-top uk-padding uk-width-expand@m">
+            <div class="uk-container uk-margin-medium-top uk-padding uk-width-expand@m">
 
             {exp:channel:entries channel="news"}
                 {layout:set name='title'}{title}{/layout:set}
@@ -12,16 +12,16 @@
 
                 <div class="">
                     <h1 class="uk-article-title">{title}</h1>
-                    <p class="uk-article-meta">Written by {author} on {entry_date format="%M %d, %Y"}<span class="uk-align-right">
+                    <p class="uk-article-meta">{entry_date format="%M %d, %Y"}<br/>{author}<span class="uk-align-right">
                     {categories}
-                        <span class="uk-margin-left uk-label uk-label-success">{category_name}</span>
+                        <span class="uk-margin-left uk-label uk-label-success"><a>{category_name}</a></span>
                     {/categories}
                     </span></p>
                 </div>
 
                 <img data-src="{news_banner}" width="" height="" alt="" uk-img>
     
-                <article class="uk-article uk-padding uk-margin-top" style="background-color:#303136d9">
+                <article class="uk-article uk-padding" style="background-color:#ffffff00">
 					<div class="uk-grid-small uk-child-width-auto" uk-grid>
                         {if comment_total > 0}
                         <div>

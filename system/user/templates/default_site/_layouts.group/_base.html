@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
     
@@ -24,7 +25,7 @@
     {/if}
 
     <meta name="twitter:domain" value="{current_url}" />
-    <meta name="twitter:title" value="The Stadia Life{if layout:title}{layout:title}{if:else}The Stadia Life{/if}" />
+    <meta name="twitter:title" value="{if layout:title}{layout:title}{if:else}The Stadia Life{/if}" />
     <meta name="twitter:description" value="{if layout:description}{layout:description}{if:else}The number one community site for all things Stadia{/if}" />
     <meta name="twitter:image" content="{if layout:image}{layout:image}{if:else}https://thestadia.life/images/uploads/achievements/_embed/thestadialife_discordlogo_transparent.png{/if}" />
     <meta name="twitter:url" value="{current_url}" />
@@ -37,9 +38,7 @@
 
 	</head>
   <body>
-    <div class="uk-section-primary uk-preserve-color" style="background-repeat: no-repeat; background-image: linear-gradient(to bottom, transparent, #4a349a), url(/assets/site_images/front_banner.jpg);"
-    >
-
+    <div>
         {embed="_includes/_navbar"}
         {layout:contents}
     </div>
@@ -61,12 +60,22 @@
                     <div class="uk-margin">
                         <input class="uk-input" type="password" placeholder="password" name="password" value="" maxlength="32" size="25">
                     </div>
-                	<p><a href="{path='member/forgot_password'}">Forgot your password?</a></p>
-                </div>
+                	<p class="uk-grid">
+                        <a class="uk-text-left" href="{path='member/forgot_password'}">Forgot your password?</a>
+                        {if auto_login}
+                        
+                        <span uk-tooltip="Christopher Pike fans, represent." class="uk-text-right"><input type="checkbox" name="auto_login" value="1" />Remember Me</span>
+                        
+                        {/if}
+                    </p>
+          		</div>
                 <div class="uk-modal-footer uk-text-right">
                     <a href="{path='member/register'}" class="uk-button uk-button-default uk-text-left" type="button">Create Account</a>
                     <button class="uk-button uk-button-primary" type="submit" name="submit">Login</button>
                 </div>
+                
+
+
             {/exp:member:login_form}
         </div>
     </div>

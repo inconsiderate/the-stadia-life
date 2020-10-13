@@ -1,10 +1,10 @@
 {layout="_layouts/_base"}
 
-<div class="uk-section uk-light uk-container">
+<div class="uk-section uk-container">
 
 
 <h2 class="uk-heading">Current Events</h2>
-{exp:channel:entries channel="events" show_future_entries="yes" order_by="entry_date" sort="asc"}
+{exp:channel:entries channel="events" show_future_entries="yes" order_by="entry_date" sort="asc" start_on="yesterday"}
     <div>
         <div class="uk-background-cover uk-background-muted uk-height-medium uk-panel uk-flex uk-flex-center uk-flex-middle" style="height: 175px;background-image: url({if banner_image}{banner_image:article}
 		{if:else}{related_game show_future_entries="yes"}{related_game:banner_image:article}{/related_game}
@@ -28,7 +28,8 @@
   
 	{if no_results}
 	<div>
-		<p class="uk-text-large uk-light">No current events! Wanna <a href="https://thestadia.life/submissions/event">submit your event</a> to the list?</p>
+		<p class="uk-text-large">No current events! Wanna <a href="https://thestadia.life/submissions/event">submit your event</a> to the list?</p>
+        <p></p>
     </div>
 	{/if}
                         

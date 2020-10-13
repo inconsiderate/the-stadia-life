@@ -1,6 +1,6 @@
 {layout="_layouts/_base"}
 
-<div class="uk-section uk-light uk-container">
+<div class="uk-section uk-container">
 
 {exp:channel:entries channel="games" limit="1" disable="categories|pagination" show_future_entries="yes"}
 
@@ -35,12 +35,14 @@
         {/if}
     </div>
 
-	{parents  field="related_game" channel="events" show_future_entries="yes"}
+	{parents channel="events" show_future_entries="yes" start_on="yesterday"}
+    {if parents:count == 1}
     <hr class="uk-divider-icon">
     <h2 class="uk-heading-tiny uk-text-center">Community Events</h2>
+    {/if}
     <div>
         <div class="uk-background-cover uk-background-muted uk-height-medium uk-panel uk-flex uk-flex-center uk-flex-middle" style="height: 250px;background-image: url({if parents:banner_image}{parents:banner_image:article}{if:else}{banner_image:article}{/if});">
-	        <div class="uk-overlay-primary uk-position-cover uk-overlay uk-position-bottom uk-light uk-section">
+	        <div class="uk-overlay-primary uk-position-cover uk-overlay uk-position-bottom uk-section">
 				<h3 class="uk-heading-small"><a href="{parents:url_title_path='events'}">{parents:title}</a></h3>
 
                 <div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
@@ -58,7 +60,7 @@
     
     <div class="uk-grid-small" uk-grid>
         <div class="uk-width-expand@m">
-            <table class="uk-table uk-table-divider uk-light uk-table-justify uk-margin-top">
+            <table class="uk-table uk-table-divider uk-table-justify uk-margin-top">
                 <tbody>
 	                {if expected_release}
                      <tr>
@@ -98,7 +100,7 @@
 
         <div class="uk-width-expand@m">
         {game_details}
-            <table class="uk-table uk-table-divider uk-light uk-table-justify uk-margin-top">
+            <table class="uk-table uk-table-divider uk-table-justify uk-margin-top">
                 <tbody>
 
 
@@ -119,8 +121,13 @@
                         <td class="uk-table-expand">Languages</td>
                         <td class="uk-table-expand">{game_details:languages}</td>
                     </tr>
-                    {/if}
+                    {/if}  
+                    {if segment_2 == 'spitlings'}
+                    <tr>
+                        <td class="uk-table-expand">Times Fai Has Died</td>
+                        <td class="uk-table-expand">2,216</td>
                     </tr>
+                    {/if}
                 </tbody>
             </table>
         {/game_details}

@@ -2,7 +2,7 @@
 {layout:set name='title'}Games{/layout:set}
 {layout:set name='description'}All the best Stadia games, from your favourite Stadia community site!{/layout:set}
 
-<div id="gamesindex" class="uk-section uk-light uk-container">
+<div id="gamesindex" class="uk-section uk-container">
 
 {exp:channel:entries channel="games" orderby="random" limit="1" show_future_entries="yes"}
     <div class="uk-background-norepeat uk-background-cover uk-background-fixed uk-background-center-center uk-height-large uk-width-expand" style="background-image: url({banner_image:article});">
@@ -31,17 +31,17 @@
 	</form>
     
         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid" onchange='sortFilterGames()'>
-            <label><input class="uk-radio" type="radio" value="released" name="filtergames"> Released</label>
-            <label><input class="uk-radio" type="radio" value="pro" name="filtergames"> Pro</label>
-            <label><input class="uk-radio" type="radio" value="upcoming" name="filtergames"> Upcoming</label>
-            <label><input class="uk-radio" type="radio" value="unconfirmed" name="filtergames"> Unconfirmed</label>
             <label><input class="uk-radio" type="radio" value="" name="filtergames" checked> All</label>
+            <label><input class="uk-radio" type="radio" value="pro" name="filtergames"> Pro</label>
+            <label><input class="uk-radio" type="radio" value="released" name="filtergames"> Released</label>
+            <label><input class="uk-radio" type="radio" value="upcoming" name="filtergames"> Upcoming</label>
+            <label><input class="uk-radio" type="radio" value="unconfirmed" name="filtergames"> Unknown</label>
         </div>
         
 </div>
 
     
-<div id="articles" class="uk-child-width-1-4@m uk-grid-match" uk-grid>
+<div id="articles" class="uk-child-width-1-5@m uk-grid-match" uk-grid>
   {embed="_ajax/game_list"}
 </div>
 

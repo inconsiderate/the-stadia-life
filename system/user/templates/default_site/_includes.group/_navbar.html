@@ -1,13 +1,14 @@
-<div class="uk-visible@m" uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light; top: 200">
+<div class="uk-visible@m" uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-dark; top: 200">
     <nav class="uk-navbar-container">
         <div class="uk-container uk-container-expand">
             <div uk-navbar>
                 <ul class="uk-navbar-nav">
                     <a href="/" class="{if !segment_1}uk-active{/if} uk-navbar-item uk-logo" href="#"><img data-src="/assets/site_images/thestadialife_logo.svg" alt="" height="80" width="80" uk-img style="min-width: 50px"></a>
-                    <li {if segment_1 == 'games'}class="uk-active"{/if}><a href="/games">Games</a></li>
-                    <li {if segment_1 == 'news'}class="uk-active"{/if}><a href="/news">News</a></li>
-                    <li {if segment_1 == 'events'}class="uk-active"{/if}><a href="/events">Events</a></li>
-                    <li {if segment_1 == 'leaderboards'}class="uk-active"{/if}  uk-tooltip="Leaderboards Coming Soon!"><a href="#">Leaderboards</a></li>
+                    <li {if segment_1 == 'games'}class="uk-active"{/if}><a class="navmenu" href="/games">Games</a></li>
+                    <li {if segment_1 == 'news' && segment_2 == ''}class="uk-active"{/if}><a class="navmenu" href="/news">News</a></li>
+                    <li {if segment_1 == 'news' && segment_3 == "review"}class="uk-active"{/if}><a class="navmenu" href="/news/category/review">Reviews</a></li>
+                    <li {if segment_1 == 'events'}class="uk-active"{/if}><a class="navmenu" href="/events">Events</a></li>
+                    <li {if segment_1 == 'leaderboards'}class="uk-active"{/if} uk-tooltip="Coming Soon!"><a class="navmenu" href="#">Merch</a></li>
                 </ul>
                 
                 <ul class="uk-navbar-right">
@@ -34,11 +35,11 @@
                     <div><a class="uk-button uk-button-secondary" href="{path='/admin_tools'}" uk-toggle>Admin Tools</a></div>
                     {/if}
                     {if logged_in}
-                    <div><a class="uk-button uk-button-default" href="{path='member/profile'}" uk-toggle>Profile</a></div>
+                    <div><a class="uk-button uk-button-primary" href="{path='member/profile'}" uk-toggle>Profile</a></div>
                     <div><a class="uk-button uk-button-secondary" href="{path='logout'}" uk-toggle>Log Out</a></div>
 
                     {if:else}
-                    <div><a class="uk-button uk-button-default" href="#modal-sections" uk-toggle>Login</a></div>
+                    <div><a class="uk-button uk-button-primary" href="#modal-sections" uk-toggle>Login</a></div>
                     {/if}
                 </ul>
             </div>
